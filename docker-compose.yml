@@ -10,7 +10,6 @@ services:
       - /etc/machine-id:/etc/machine-id  # required for the Supervisor
       - /etc/localtime:/etc/localtime:ro  # Ensures the container uses the same timezone as the host system
       - /run/dbus:/run/dbus:ro  # important for device discovery (e.g., Bluetooth, some Zigbee/Z-Wave controllers).
-    network_mode: host
     # devices:
       # - /dev/ttyUSB0:/dev/ttyUSB0
 
