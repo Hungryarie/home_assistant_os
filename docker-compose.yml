@@ -1,0 +1,28 @@
+services:
+  homeassistant:
+    container_name: home_assistant
+    image: ghcr.io/home-assistant/home-assistant:stable
+    restart: unless-stopped
+    privileged: true
+    network_mode: host
+    volumes:
+      - ./config:/config
+      - /etc/machine-id:/etc/machine-id  # required for the Supervisor
+      - /etc/localtime:/etc/localtime:ro  # Ensures the container uses the same timezone as the host system
+      - /run/dbus:/run/dbus:ro  # important for device discovery (e.g., Bluetooth, some Zigbee/Z-Wave controllers).
+    network_mode: host
+    # devices:
+      # - /dev/ttyUSB0:/dev/ttyUSB0
+
+  supervisor:
+    container_name: ha_supervisor
+    image: homeassistant/amd64-hassio-supervisor:latest
+    restart: unless-stopped
+    privileged: true
+    network_mode: host
+    volumes:
+      - ./config:/config
+      - /etc/localtime:/etc/localtime:ro
+      - /run/dbus:/run/dbus:ro
+      - /etc/machine-id:/etc/machine-id
+      - /var/run/docker.sock:/var/run/docker.sock
