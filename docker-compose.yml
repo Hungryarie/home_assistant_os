@@ -14,11 +14,15 @@ services:
       # - /dev/ttyUSB0:/dev/ttyUSB0
 
   supervisor:
-    container_name: ha_supervisor
+    container_name: hassio_supervisor
     image: homeassistant/amd64-hassio-supervisor:latest
     restart: unless-stopped
     privileged: true
     network_mode: host
+    environment:
+      - SUPERVISOR_SHARE=./config
+      - SUPERVISOR_NAME=hassio_supervisor
+      - SUPERVISOR_MACHINE=generic-x86-64
     volumes:
       - ./config:/config
       - /etc/localtime:/etc/localtime:ro
