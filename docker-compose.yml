@@ -20,11 +20,11 @@ services:
     privileged: true
     network_mode: host
     environment:
-      - SUPERVISOR_SHARE=./config
+      - SUPERVISOR_SHARE=./data
       - SUPERVISOR_NAME=hassio_supervisor
       - SUPERVISOR_MACHINE=generic-x86-64
     volumes:
-      - ./config:/config
+      - ./data_supervisor:/data
       - /etc/localtime:/etc/localtime:ro
       - /run/dbus:/run/dbus:ro
       - /etc/machine-id:/etc/machine-id
