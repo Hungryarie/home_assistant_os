@@ -10,22 +10,24 @@ services:
       - /etc/machine-id:/etc/machine-id  # required for the Supervisor
       - /etc/localtime:/etc/localtime:ro  # Ensures the container uses the same timezone as the host system
       - /run/dbus:/run/dbus:ro  # important for device discovery (e.g., Bluetooth, some Zigbee/Z-Wave controllers).
-    # devices:
-      # - /dev/ttyUSB0:/dev/ttyUSB0
+    devices:
+      - /dev/ttyUSB0:/dev/ttyUSB0  # for P1 meter
 
-  supervisor:
-    container_name: hassio_supervisor
-    image: homeassistant/amd64-hassio-supervisor:latest
-    restart: unless-stopped
-    privileged: true
-    network_mode: host
-    environment:
-      - SUPERVISOR_SHARE=./data
-      - SUPERVISOR_NAME=hassio_supervisor
-      - SUPERVISOR_MACHINE=generic-x86-64
-    volumes:
-      - ./data_supervisor:/data
-      - /etc/localtime:/etc/localtime:ro
-      - /run/dbus:/run/dbus:ro
-      - /etc/machine-id:/etc/machine-id
-      - /var/run/docker.sock:/var/run/docker.sock
+#  supervisor:
+#    container_name: hassio_supervisor
+#    image: homeassistant/amd64-hassio-supervisor:latest
+#    restart: unless-stopped
+#    privileged: true
+#    network_mode: host
+#    environment:
+#      - SUPERVISOR_SHARE=/data
+#      - SUPERVISOR_NAME=hassio_supervisor
+#      - SUPERVISOR_MACHINE=generic-x86-64
+#    volumes:
+#      - /data_supervisor:/data
+#      - /etc/localtime:/etc/localtime:ro
+#      - /run/dbus:/run/dbus:ro
+#      - /etc/machine-id:/etc/machine-id
+#      - /var/run/docker.sock:/var/run/docker.sock
+#      - /data_supervisor/dns:/data/dns  # Relative path for dns
+#      - /data_supervisor/audio:/data/audio  # Relative path for audio
