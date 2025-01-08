@@ -1,0 +1,13 @@
+.storage
+backups
+custom_components
+blueprints
+www
+
+secrets.yaml
+.HA_VERSION
+
+*.db
+*.db-*
+*.log
+*.log.*
